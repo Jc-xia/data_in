@@ -1,11 +1,9 @@
 package com.example.test.model;
 
 /**
-* tlhsr 实体类
-* Fri May 25 20:51:20 CST 2018 
+* tlhsr 实体�?
+* Fri May 25 10:36:03 CST 2018 
 */ 
-
-
 public class Tlhsr{
 	private String gid;
 	private String name;

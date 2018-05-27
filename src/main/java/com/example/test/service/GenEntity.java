@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class GenEntity {  
   
-    // 指定实体生成所在包的路径  
+    // 指定实体生成所在包的路�? 
     private String packageOutPath = "com.example.test.model";  
-    // 数据库表名  
+    // 数据库表�? 
     private String tablename = "tlhsr";  
     // 列名数组  
     private String[] colnames;  
@@ -32,17 +32,19 @@ public class GenEntity {
     // 是否需要导入包java.sql.*  
     private boolean f_sql = false;  
   
-    // 数据库连接  
+    // 数据库连�? 
     private static final String URL = "jdbc:postgresql://localhost:5432/tl_hsr";  
     private static final String NAME = "postgres";  
     private static final String PASS = "postgres";  
     private static final String DRIVER = "org.postgresql.Driver";  
   
- 
-    public void gen() {  
+    /**
+     * 生成主方�?
+     */
+    public void gen() {
         // 创建连接  
         Connection con = null;  
-        // 查要生成实体类的表  
+        // 查要生成实体类的�? 
         String sql = "select * from " + tablename;  
         Statement pStemt = null;  
         try {  
@@ -56,7 +58,7 @@ public class GenEntity {
             pStemt = (Statement) con.createStatement();  
             ResultSet rs = pStemt.executeQuery(sql);  
             ResultSetMetaData rsmd = rs.getMetaData();  
-            int size = rsmd.getColumnCount(); // 统计列  
+            int size = rsmd.getColumnCount(); // 统计�? 
             colnames = new String[size];  
             colTypes = new String[size];  
             colSizes = new int[size];  
@@ -115,7 +117,7 @@ public class GenEntity {
   
         sb.append("package " + this.packageOutPath + ";\r\n");  
         sb.append("\r\n");  
-        // 判断是否导入工具包  
+        // 判断是否导入工具�? 
         if (f_util) {  
             sb.append("import java.util.Date;\r\n");  
         }  
@@ -129,7 +131,7 @@ public class GenEntity {
         sb.append("*/ \r\n");  
         // 实体部分  
         sb.append("\r\n\r\npublic class " + initcap(tablename) + "{\r\n");  
-        processAllAttrs(sb);// 属性  
+        processAllAttrs(sb);// 属�? 
         processAllMethod(sb);// get set方法  
         sb.append("}\r\n");  
   
@@ -138,7 +140,7 @@ public class GenEntity {
     }  
   
     /** 
-     * 功能：生成所有属性 
+     * 功能：生成所有属�?
      *  
      * @param sb 
      */  
@@ -152,7 +154,7 @@ public class GenEntity {
     }  
   
     /** 
-     * 数据字段变成Java属性 
+     * 数据字段变成Java属�?
      *  
      * @param string 
      * @return 
@@ -163,13 +165,13 @@ public class GenEntity {
   
         for (int i = 0; i < builder.length(); i++) {  
             if (builder.charAt(i) == '_') {  
-                // 第一次出现该符号的位置  
+                // 第一次出现该符号的位�? 
                 char c = builder.charAt(i + 1);  
                 c = (char) (c - 32);  
                 StringBuilder replace1 = builder.replace(i + 1, i + 2, c + "");  
                 builder = replace1.replace(i, i + 1, "");  
   
-                // 最后一次出现该符号的位置  
+                // 最后一次出现该符号的位�? 
                 int of = builder.lastIndexOf("_", string2.length());  
                 if (of != -1) {  
                     char c1 = builder.charAt(of + 1);  
@@ -186,7 +188,7 @@ public class GenEntity {
     }  
   
     /** 
-     * 功能：生成所有方法 
+     * 功能：生成所有方�?
      *  
      * @param sb 
      */  
@@ -208,7 +210,7 @@ public class GenEntity {
     }  
   
     /** 
-     * 功能：将输入字符串的首字母改成大写 
+     * 功能：将输入字符串的首字母改成大�?
      *  
      * @param str 
      * @return 
@@ -236,7 +238,7 @@ public class GenEntity {
     }  
   
     /** 
-     * 功能：获得列的数据类型 
+     * 功能：获得列的数据类�?
      *  
      * @param sqlType 
      * @return 
@@ -265,6 +267,5 @@ public class GenEntity {
         }  
   
         return "String";  
-    }  
-    
+    }      
 } 
